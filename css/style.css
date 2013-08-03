@@ -1,0 +1,25 @@
+body {
+  font-family: sans-serif;
+  background: #2C2C2C;
+}
+
+h2{
+	color: white;
+}
+
+.main{
+	width: 880px;
+	margin: auto;
+}
+
+.card{
+	text-align: center;
+}
+
+
+
+@media all and (max-width: 800px){
+  .main {
+    width: 100%;
+  }
+}
