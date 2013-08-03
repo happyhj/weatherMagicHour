@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8" />
+<script src="js/noBounce.js" type="text/javascript"></script>
+<script type="text/javascript">
+	noBounce.init({preventDefault: true, animate: true}); 
+</script>
+<!-- Not letterboxed on iPhone 5 -->
+<meta name="viewport"
+  content="initial-scale=1.0">
+<meta name="viewport"
+  content="width=320.1, user-scalable=no">  
+<!-- Changing the Status Bar Appearance -->
+<meta name="apple-mobile-web-app-status-bar-style" content="translucent black" />
+<!-- Hiding Safari User Interface Components -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+
+<!-- jQuery 1.10.1 : Start -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<!-- jQuery 1.10.1 : End -->
+<script src="js/modernizr.custom.js"></script>
+
+
+<title>iScroll demo: carousel</title>
+
+<script type="text/javascript" src="js/iscroll.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$("#wrapper").css("width",String($(window).width())+"px");
+			$(".slide").css("width",String($(window).width())+"px");
+			$("#scroller").css("width",String($(window).width()*3)+"px");
+		});
+// 창 크기가 변하면 이벤트 발생
+$(window).resize(function() {
+			$("#wrapper").css("width",String($(window).width())+"px");
+			$(".slide").css("width",String($(window).width())+"px");
+			$("#scroller").css("width",String($(window).width()*3)+"px");
+});
+		</script>
+<script type="text/javascript">
+
+var myScroll;
+
+function loaded () {
+	myScroll = new IScroll('#wrapper', {
+		scrollX: true,
+		scrollY: false,
+		momentum: false,
+		snap: true,
+		click: true,
+		snapSpeed: 400,
+		keyBindings: true,
+		indicators: {
+			el: document.getElementById('indicator'),
+			resize: false
+		}
+	});
+}
+
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+</script>
+
+<style type="text/css">
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html {
+	-ms-touch-action: none;
+}
+
+body, ul, li {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+body {
+	font-size: 12px;
+	font-family: ubuntu, helvetica, arial;
+	overflow: hidden; /* this is important to prevent the whole page to bounce */
+}
+
+#viewport {
+	position: relative;
+	width: 100%;
+	height: 240px;
+	margin: 0 auto;
+	background: #444;
+	overflow: hidden;
+}
+
+#wrapper {
+	width: 50px;
+	height: 240px;
+	margin: 0px auto;
+}
+.slide {
+	width: 50px;
+	height: 240px;
+	float: left;
+	
+	background-color: aqua;
+}
+
+#scroller {
+	position: absolute;
+	z-index: 1;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	width: 200px;
+	height: 240px;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	-o-text-size-adjust: none;
+	text-size-adjust: none;
+	background-color: #444;
+}
+
+
+.painting {
+	width: 80%;
+	height: 200px;
+	margin: 20px auto;
+	background-color: rgba(239,20,20,0.6);
+	
+	text-align: center;
+	font-size: 150px;
+	
+}
+
+#indicator {
+	position: relative;
+	width: 100%;
+	height: 5px;
+	margin: 10px auto;
+	background: orange;
+}
+
+#dotty {
+	position: absolute;
+	width: 33%;
+	height: 5px;
+	background: #777;
+}
+
+.menuTab {
+	display: inline-block;
+	width: 32%;
+	height: 30px;
+	background-color: fuchsia;
+	margin: 1px;
+}
+
+</style>
+</head>
+<body onload="loaded()">
+<div class="menuTab" onclick="myScroll.scrollToElement(document.querySelector('#scroller div:nth-child(1)'))"></div>
+<div class="menuTab" onclick="myScroll.scrollToElement(document.querySelector('#scroller div:nth-child(2)'))"></div>
+<div class="menuTab" onclick="myScroll.scrollToElement(document.querySelector('#scroller div:nth-child(3)'))"></div>
+
+<div id="indicator">
+	<div id="dotty"></div>
+</div>
+<div id="viewport">
+	<div id="wrapper">
+		<div id="scroller">
+			<div class="slide">
+				<div class="painting">1</div>
+			</div>
+			<div class="slide">
+				<div class="painting">2</div>
+			</div>
+			<div class="slide">
+				<div class="painting">3</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+</body>
+</html>
