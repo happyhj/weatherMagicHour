@@ -48,9 +48,8 @@ function loaded () {
 	
 	myScroll.on('flick', function () { console.log('flicked ' + this.currentPage.pageX); });		
 
-
 	myScroll.on('onScroll', function () { console.log(this.currentPage.x); });
-
+/*
 	myScroll.on('scrollEnd', function () { 
 		console.log('scroll Ended Page:' + this.currentPage.pageX); 
 		switch(this.currentPage.pageX) {
@@ -59,11 +58,9 @@ function loaded () {
 				$("div#nav>div.menuTab:nth-child(2)").animate({width:"25%"},300);
 				$("div#nav>div.menuTab:nth-child(3)").animate({width:"25%"},300);
 
-
 				$("div#nav>div.menuTab:nth-child(1)").css("color","orange");
 				$("div#nav>div.menuTab:nth-child(2)").css("color","black");
 				$("div#nav>div.menuTab:nth-child(3)").css("color","black");
-
 			break;
 			case 1:
 				$("div#nav>div.menuTab:nth-child(2)").animate({width:"50%"},300);
@@ -73,7 +70,6 @@ function loaded () {
 				$("div#nav>div.menuTab:nth-child(2)").css("color","orange");
 				$("div#nav>div.menuTab:nth-child(1)").css("color","black");
 				$("div#nav>div.menuTab:nth-child(3)").css("color","black");
-
 			break;
 			case 2:
 				$("div#nav>div.menuTab:nth-child(3)").animate({width:"50%"},300);
@@ -85,7 +81,44 @@ function loaded () {
 				$("div#nav>div.menuTab:nth-child(2)").css("color","black");
 			break;			
 		}
-	});		
+	});	
+*/
+	myScroll.on('scrollEnd', function () { 
+		console.log('scroll Ended Page:' + this.currentPage.pageX); 
+		switch(this.currentPage.pageX) {
+			case 0:
+//				$("div#nav>div.menuTab:nth-child(1)").click();
+				$("div#nav>div.menuTab:nth-child(1)").animate({width:"50%"},300);
+				$("div#nav>div.menuTab:nth-child(2)").animate({width:"25%"},300);
+				$("div#nav>div.menuTab:nth-child(3)").animate({width:"25%"},300);
+
+				$("div#nav>div.menuTab:nth-child(1)").css("color","orange");
+				$("div#nav>div.menuTab:nth-child(2)").css("color","black");
+				$("div#nav>div.menuTab:nth-child(3)").css("color","black");
+			break;
+			case 1:
+//				$("div#nav>div.menuTab:nth-child(2)").click();
+				$("div#nav>div.menuTab:nth-child(2)").animate({width:"50%"},300);
+				$("div#nav>div.menuTab:nth-child(1)").animate({width:"25%"},300);
+				$("div#nav>div.menuTab:nth-child(3)").animate({width:"25%"},300);
+				
+				$("div#nav>div.menuTab:nth-child(2)").css("color","orange");
+				$("div#nav>div.menuTab:nth-child(1)").css("color","black");
+				$("div#nav>div.menuTab:nth-child(3)").css("color","black");
+			break;
+			case 2:
+//				$("div#nav>div.menuTab:nth-child(3)").click();
+				$("div#nav>div.menuTab:nth-child(3)").animate({width:"50%"},300);
+				$("div#nav>div.menuTab:nth-child(1)").animate({width:"25%"},300);
+				$("div#nav>div.menuTab:nth-child(2)").animate({width:"25%"},300);
+
+				$("div#nav>div.menuTab:nth-child(3)").css("color","orange");
+				$("div#nav>div.menuTab:nth-child(1)").css("color","black");
+				$("div#nav>div.menuTab:nth-child(2)").css("color","black");
+			break;			
+		}
+	});	
+	
 }
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
@@ -104,22 +137,28 @@ document.addEventListener('touchmove', function (e) { e.preventDefault(); }, fal
 
 			$("div#nav>div.menuTab:nth-child(1)").bind( "click touchend", function() {
 				myScroll.scrollTo(0,0,300);
+				myScroll.currentPage.pageX=0;
+
 			});
 			$("div#nav>div.menuTab:nth-child(2)").bind( "click touchend", function() {
 				myScroll.scrollToElement(document.querySelector('#tomorrowPage'),300);
+				myScroll.currentPage.pageX=1;
+
 			});			
 			$("div#nav>div.menuTab:nth-child(3)").bind( "click touchend", function() {
 				myScroll.scrollToElement(document.querySelector('#alarmPage'),300);
+				myScroll.currentPage.pageX=2;
+
 			});
 
 			$("div#nav>div.menuTab:nth-child(1)").animate({width:"50%"},300);
 			$("div#nav>div.menuTab:nth-child(2)").animate({width:"25%"},300);
 			$("div#nav>div.menuTab:nth-child(3)").animate({width:"25%"},300);
 
-
 			$("div#nav>div.menuTab:nth-child(1)").css("color","orange");
 			$("div#nav>div.menuTab:nth-child(2)").css("color","black");
 			$("div#nav>div.menuTab:nth-child(3)").css("color","black");
+
 		});
 		
 		// 창 크기가 변하면 이벤트 발생
