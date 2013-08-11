@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8" />
+<script src="js/noBounce.js" type="text/javascript"></script>
+<script type="text/javascript">
+	noBounce.init({preventDefault: true, animate: true}); 
+</script>
+<!-- Not letterboxed on iPhone 5 -->
+<meta name="viewport"
+  content="initial-scale=1.0">
+<meta name="viewport"
+  content="width=320.1, user-scalable=no">  
+<!-- Changing the Status Bar Appearance -->
+<meta name="apple-mobile-web-app-status-bar-style" content="translucent black" />
+<!-- Hiding Safari User Interface Components -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+
+<!-- jQuery 1.10.1 : Start -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<!-- jQuery 1.10.1 : End -->
+<script src="js/modernizr.custom.js"></script>
+
+
+<title>Magic Hour UI Skeleton - Swipe Menu(iScroll5)</title>
+
+<script type="text/javascript" src="js/iscroll.js"></script>
+
+<script type="text/javascript">
+
+var myScroll;
+
+function loaded () {
+	myScroll = new IScroll('#wrapper', {
+		scrollX: true,
+		scrollY: false,
+		momentum: false,
+		snap: true,
+		click: true,
+		snapSpeed: 400,
+		keyBindings: true,
+		indicators: {
+			el: document.getElementById('indicator'),
+			resize: false
+		}
+	});
+	
+	myScroll.on('flick', function () { console.log('flicked ' + this.currentPage.pageX); });		
+
+
+	myScroll.on('onScroll', function () { console.log(this.currentPage.x); });
+
+	myScroll.on('scrollEnd', function () { 
+		console.log('scroll Ended Page:' + this.currentPage.pageX); 
+		switch(this.currentPage.pageX) {
+			case 0:
+				$("div#nav>div.menuTab:nth-child(1)").animate({width:"50%"},300);
+				$("div#nav>div.menuTab:nth-child(2)").animate({width:"25%"},300);
+				$("div#nav>div.menuTab:nth-child(3)").animate({width:"25%"},300);
+
+
+				$("div#nav>div.menuTab:nth-child(1)").css("color","orange");
+				$("div#nav>div.menuTab:nth-child(2)").css("color","black");
+				$("div#nav>div.menuTab:nth-child(3)").css("color","black");
+
+			break;
+			case 1:
+				$("div#nav>div.menuTab:nth-child(2)").animate({width:"50%"},300);
+				$("div#nav>div.menuTab:nth-child(1)").animate({width:"25%"},300);
+				$("div#nav>div.menuTab:nth-child(3)").animate({width:"25%"},300);
+				
+				$("div#nav>div.menuTab:nth-child(2)").css("color","orange");
+				$("div#nav>div.menuTab:nth-child(1)").css("color","black");
+				$("div#nav>div.menuTab:nth-child(3)").css("color","black");
+
+			break;
+			case 2:
+				$("div#nav>div.menuTab:nth-child(3)").animate({width:"50%"},300);
+				$("div#nav>div.menuTab:nth-child(1)").animate({width:"25%"},300);
+				$("div#nav>div.menuTab:nth-child(2)").animate({width:"25%"},300);
+
+				$("div#nav>div.menuTab:nth-child(3)").css("color","orange");
+				$("div#nav>div.menuTab:nth-child(1)").css("color","black");
+				$("div#nav>div.menuTab:nth-child(2)").css("color","black");
+			break;			
+		}
+	});		
+}
+
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+</script>
+		<script type="text/javascript">
+
+		$(document).ready(function() {
+			$("#wrapper").css("width",String($(window).width())+"px");
+			$(".slide").css("width",String($(window).width())+"px");
+			$("#scroller").css("width",String($(window).width()*3)+"px");
+
+			$("#wrapper").css("height",String($(window).height()-60)+"px");
+			$(".slide").css("height",String($(window).height()-60)+"px");
+			$("#scroller").css("height",String($(window).height()-60)+"px");
+			$("#viewport").css("height",String($(window).height()-60)+"px");
+
+			$("div#nav>div.menuTab:nth-child(1)").bind( "click touchend", function() {
+				myScroll.scrollTo(0,0,300);
+			});
+			$("div#nav>div.menuTab:nth-child(2)").bind( "click touchend", function() {
+				myScroll.scrollToElement(document.querySelector('#tomorrowPage'),300);
+			});			
+			$("div#nav>div.menuTab:nth-child(3)").bind( "click touchend", function() {
+				myScroll.scrollToElement(document.querySelector('#alarmPage'),300);
+			});
+
+			$("div#nav>div.menuTab:nth-child(1)").animate({width:"50%"},300);
+			$("div#nav>div.menuTab:nth-child(2)").animate({width:"25%"},300);
+			$("div#nav>div.menuTab:nth-child(3)").animate({width:"25%"},300);
+
+
+			$("div#nav>div.menuTab:nth-child(1)").css("color","orange");
+			$("div#nav>div.menuTab:nth-child(2)").css("color","black");
+			$("div#nav>div.menuTab:nth-child(3)").css("color","black");
+		});
+		
+		// 창 크기가 변하면 이벤트 발생
+		$(window).resize(function() {
+					$("#wrapper").css("width",String($(window).width())+"px");
+					$(".slide").css("width",String($(window).width())+"px");
+					$("#scroller").css("width",String($(window).width()*3)+"px");
+		
+					$("#wrapper").css("height",String($(window).height()-60)+"px");
+					$(".slide").css("height",String($(window).height()-60)+"px");
+					$("#scroller").css("height",String($(window).height()-60)+"px");
+					$("#viewport").css("height",String($(window).height()-60)+"px");
+		});
+		
+		</script>
+<style type="text/css">
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html {
+	-ms-touch-action: none;
+}
+body {
+	background-image: url("http://theeyewashstation.files.wordpress.com/2013/06/vanilla2.jpg");
+	margin: 0px; padding: 0px;				
+}
+body, ul, li {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+body {
+	font-size: 12px;
+	font-family: ubuntu, helvetica, arial;
+	overflow: hidden; /* this is important to prevent the whole page to bounce */
+}
+
+#viewport {
+	position: relative;
+	top:5px;
+	width: 100%;
+	height: 600px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+#wrapper {
+	width: 50px;
+	height: 600px;
+	margin: 0px auto;
+}
+.slide {
+	width: 50px;
+	height: 600px;
+	float: left;
+	background-color: rgba(255,255,255,0.23);
+}
+
+#scroller {
+	position: absolute;
+	z-index: 1;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	width: 200px;
+	height: 600px;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	-o-text-size-adjust: none;
+	text-size-adjust: none;
+}
+
+
+.painting {
+	width: 100%;
+	height: 100%;
+	margin: 0px auto;
+	text-align: center;
+	font-size: 300px;
+}
+
+#indicator {
+	position: relative;
+	top: 50px;
+	width: 100%;
+	height: 5px;
+	margin: 10px auto;
+	background: orange;
+	background: rgba(55,55,55,0.4);
+}
+
+#dotty {
+	position: absolute;
+	width: 50%;
+	height: 5px;
+	background: orange;
+
+}
+
+#nav {
+	float: left;
+	width: 100%;
+	height: 60px;
+	background-color: rgba(0,0,0,0.2);
+}
+
+.menuTab {
+	float: left;
+	width: 33.333333333333333333333333333333333333%;
+	height: 60px;
+	margin: 0px;
+	
+	text-align: center;
+	font-size: 49px;
+}
+
+.invisible{
+	display:none;
+}
+
+
+</style>
+</head>
+<body onload="loaded()">
+<div id="nav">
+<div class="menuTab">1</div>
+<div class="menuTab">2</div>
+<div class="menuTab">3</div>
+</div>
+<div id="indicator">
+	<div id="dotty"></div>
+</div>
+<div id="viewport">
+	<div id="wrapper">
+		<div id="scroller">
+					<div class="slide" id="todayPage">
+						<div class="painting">1</div>
+					</div>
+					<div class="slide" id="tomorrowPage">
+						<div class="painting">2</div>
+					</div>
+					<div class="slide" id="alarmPage">
+						<div class="painting">3</div>
+					</div>
+		</div>
+	</div>
+</div>
+
+
+
+</body>
+</html>
