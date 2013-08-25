@@ -18,7 +18,7 @@
 <link rel="stylesheet" type="text/css" href="css/reset.css" />
 
 <!-- jQuery 1.10.1 : Start -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <!-- jQuery 1.10.1 : End -->
 <script src="js/modernizr.custom.js"></script>
 
@@ -49,68 +49,32 @@ function loaded () {
 	myScroll.on('flick', function () { console.log('flicked ' + this.currentPage.pageX); });		
 
 	myScroll.on('onScroll', function () { console.log(this.currentPage.x); });
-/*
+
 	myScroll.on('scrollEnd', function () { 
 		console.log('scroll Ended Page:' + this.currentPage.pageX); 
 		switch(this.currentPage.pageX) {
 			case 0:
-				$("div#nav>div.menuTab:nth-child(1)").animate({width:"50%"},300);
-				$("div#nav>div.menuTab:nth-child(2)").animate({width:"25%"},300);
-				$("div#nav>div.menuTab:nth-child(3)").animate({width:"25%"},300);
+				$("div#nav>div.menuTab:nth-child(1)").animate({width:"50%"},250);
+				$("div#nav>div.menuTab:nth-child(2)").animate({width:"25%"},250);
+				$("div#nav>div.menuTab:nth-child(3)").animate({width:"25%"},250);
 
 				$("div#nav>div.menuTab:nth-child(1)").css("color","orange");
 				$("div#nav>div.menuTab:nth-child(2)").css("color","black");
 				$("div#nav>div.menuTab:nth-child(3)").css("color","black");
 			break;
 			case 1:
-				$("div#nav>div.menuTab:nth-child(2)").animate({width:"50%"},300);
-				$("div#nav>div.menuTab:nth-child(1)").animate({width:"25%"},300);
-				$("div#nav>div.menuTab:nth-child(3)").animate({width:"25%"},300);
+				$("div#nav>div.menuTab:nth-child(2)").animate({width:"50%"},250);
+				$("div#nav>div.menuTab:nth-child(1)").animate({width:"25%"},250);
+				$("div#nav>div.menuTab:nth-child(3)").animate({width:"25%"},250);
 				
 				$("div#nav>div.menuTab:nth-child(2)").css("color","orange");
 				$("div#nav>div.menuTab:nth-child(1)").css("color","black");
 				$("div#nav>div.menuTab:nth-child(3)").css("color","black");
 			break;
 			case 2:
-				$("div#nav>div.menuTab:nth-child(3)").animate({width:"50%"},300);
-				$("div#nav>div.menuTab:nth-child(1)").animate({width:"25%"},300);
-				$("div#nav>div.menuTab:nth-child(2)").animate({width:"25%"},300);
-
-				$("div#nav>div.menuTab:nth-child(3)").css("color","orange");
-				$("div#nav>div.menuTab:nth-child(1)").css("color","black");
-				$("div#nav>div.menuTab:nth-child(2)").css("color","black");
-			break;			
-		}
-	});	
-*/
-	myScroll.on('scrollEnd', function () { 
-		console.log('scroll Ended Page:' + this.currentPage.pageX); 
-		switch(this.currentPage.pageX) {
-			case 0:
-//				$("div#nav>div.menuTab:nth-child(1)").click();
-				$("div#nav>div.menuTab:nth-child(1)").animate({width:"50%"},300);
-				$("div#nav>div.menuTab:nth-child(2)").animate({width:"25%"},300);
-				$("div#nav>div.menuTab:nth-child(3)").animate({width:"25%"},300);
-
-				$("div#nav>div.menuTab:nth-child(1)").css("color","orange");
-				$("div#nav>div.menuTab:nth-child(2)").css("color","black");
-				$("div#nav>div.menuTab:nth-child(3)").css("color","black");
-			break;
-			case 1:
-//				$("div#nav>div.menuTab:nth-child(2)").click();
-				$("div#nav>div.menuTab:nth-child(2)").animate({width:"50%"},300);
-				$("div#nav>div.menuTab:nth-child(1)").animate({width:"25%"},300);
-				$("div#nav>div.menuTab:nth-child(3)").animate({width:"25%"},300);
-				
-				$("div#nav>div.menuTab:nth-child(2)").css("color","orange");
-				$("div#nav>div.menuTab:nth-child(1)").css("color","black");
-				$("div#nav>div.menuTab:nth-child(3)").css("color","black");
-			break;
-			case 2:
-//				$("div#nav>div.menuTab:nth-child(3)").click();
-				$("div#nav>div.menuTab:nth-child(3)").animate({width:"50%"},300);
-				$("div#nav>div.menuTab:nth-child(1)").animate({width:"25%"},300);
-				$("div#nav>div.menuTab:nth-child(2)").animate({width:"25%"},300);
+				$("div#nav>div.menuTab:nth-child(3)").animate({width:"50%"},250);
+				$("div#nav>div.menuTab:nth-child(1)").animate({width:"25%"},250);
+				$("div#nav>div.menuTab:nth-child(2)").animate({width:"25%"},250);
 
 				$("div#nav>div.menuTab:nth-child(3)").css("color","orange");
 				$("div#nav>div.menuTab:nth-child(1)").css("color","black");
@@ -151,9 +115,9 @@ document.addEventListener('touchmove', function (e) { e.preventDefault(); }, fal
 
 			});
 
-			$("div#nav>div.menuTab:nth-child(1)").animate({width:"50%"},300);
-			$("div#nav>div.menuTab:nth-child(2)").animate({width:"25%"},300);
-			$("div#nav>div.menuTab:nth-child(3)").animate({width:"25%"},300);
+			$("div#nav>div.menuTab:nth-child(1)").animate({width:"50%"},100);
+			$("div#nav>div.menuTab:nth-child(2)").animate({width:"25%"},100);
+			$("div#nav>div.menuTab:nth-child(3)").animate({width:"25%"},100);
 
 			$("div#nav>div.menuTab:nth-child(1)").css("color","orange");
 			$("div#nav>div.menuTab:nth-child(2)").css("color","black");
