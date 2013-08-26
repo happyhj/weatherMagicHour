@@ -87,7 +87,7 @@
 							 			<p>9.9km</p>
 						 			</div>
 						 			<div class="weatherInfo_container">
-							 			<img src="img/cloud.png"/>
+							 			<span class="icon">A</span>
 							 			<p class="weather_description label">sss</p>
 							 			<p class="weather_description placeholder">s</p>
 						 			</div>
@@ -134,7 +134,7 @@
 							 			<p>0%</p>
 						 			</div>
 						 			<div class="weatherInfo_container">
-							 			<img src="img/cloud.png"/>
+							 			<span class="icon">A</span>
 							 			<p class="weather_description label">sss</p>
 							 			<p class="weather_description placeholder">s</p>
 						 			</div>
@@ -355,8 +355,10 @@ document.addEventListener('touchmove', function (e) { e.preventDefault(); }, fal
 	div.weatherInfo_container p.weather_description.label{
 		position: absolute;
 		text-align: center;
-		width:180%;
-		left:-40%;
+		width:130%;
+		left:-15%;
+		margin-top: 5px;
+		line-height: 11px;
 	}
 	
 	div.weatherInfo_container p.weather_description.placeholder {

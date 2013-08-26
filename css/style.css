@@ -1,3 +1,22 @@
+@font-face {
+    font-family: 'MeteoconsRegular';
+    src: url('../img/meteocons-webfont.woff') format('woff');
+	src: url('../img/meteocons-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+.icon {
+position: absolute;
+display: block;
+top:-58px;
+left:28px;
+font-family: 'MeteoconsRegular';
+font-size:60px;
+color: #FFF;
+padding: 0px;
+margin:0px;
+}
+
 * {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;

@@ -160,11 +160,17 @@ function updateWeatherPage(){
 	sWeatherinfo =  sWeatherinfo + "주간예보:" + myForecastData["currently"]["weeklySummery"];
 
 
+	$("div#todayPage div.card>.front div.weatherInfo_container>span.icon").html(getWeatherIconCode(myForecastData["currently"]));
+	
 	$("div#todayPage .card>.front div.weatherInfo_container:nth-child(4)>p").html(parseInt(myForecastData["currently"]["visibility"])+"km");
 	$("div#todayPage .card>.front div.weatherInfo_container p.label").html(myForecastData["currently"]["summary"]);
 	$("div#todayPage .card>.front div.weatherInfo_container>p.cloud_cover_value").html(myForecastData["currently"]["cloudCover"]*100+"%");
 	var cloudCover = parseInt(myForecastData["currently"]["cloudCover"]*10);
 	$("div#todayPage .card>.front div.weatherInfo_container:nth-child(6)>img").attr("src","img/cloudCover"+cloudCover+".png");
+
+
+	$("div#tomorrowPage div.card>.front div.weatherInfo_container>span.icon").html(getWeatherIconCode(myForecastData["tomorrow"]["summary"]));
+
 
 	$("div#tomorrowPage .card>.front div.weatherInfo_container:nth-child(5)>p").html(parseInt(myForecastData["tomorrow"]["summary"]["precipProbability"]*100)+"%");
 	$("div#tomorrowPage .card>.front div.weatherInfo_container p.label").html(myForecastData["tomorrow"]["summary"]["summary"]);
@@ -331,6 +337,51 @@ function getNearestHourlyForecastIndex(timeStamp,forecastData) {
 	}
 	return index;	
 }
+
+function getWeatherIconCode(present) {
+//clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, 
+//partly-cloudy-day, or partly-cloudy-night	
+	var sIcon = present['icon'];
+	
+	switch(sIcon)
+	{
+	case 'clear-day':
+	  return 'B';
+	  break;
+	case 'clear-night':
+	  return 'C';
+	  break;
+	case 'partly-cloudy-day':
+	  return 'H';
+	  break;
+	case 'partly-cloudy-night':
+	  return 'I';
+	  break;
+	case 'rain':
+	  return 'R';
+	  break;
+	case 'snow':
+	  return 'W';
+	  break;
+	case 'sleet':
+	  return 'X'
+	  break;
+	case 'wind':
+	  return 'F';
+	  break;
+	case 'fog':
+	  return 'F';
+	  break;;
+	case 'cloudy':
+	  return 'F';
+	  break;  
+	default:
+	  return 'A';
+	}	
+	return
+}
+
+
 
 // 창 크기가 변하면 이벤트 발생
 $(window).resize(function() {
