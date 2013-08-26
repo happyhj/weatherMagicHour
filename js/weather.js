@@ -166,7 +166,7 @@ function updateWeatherPage(){
 	var cloudCover = parseInt(myForecastData["currently"]["cloudCover"]*10);
 	$("div#todayPage .card>.front div.weatherInfo_container:nth-child(6)>img").attr("src","img/cloudCover"+cloudCover+".png");
 
-	$("div#tomorrowPage .card>.front div.weatherInfo_container:nth-child(5)>p").html(myForecastData["tomorrow"]["summary"]["precipProbability"]*100+"%");
+	$("div#tomorrowPage .card>.front div.weatherInfo_container:nth-child(5)>p").html(parseInt(myForecastData["tomorrow"]["summary"]["precipProbability"]*100)+"%");
 	$("div#tomorrowPage .card>.front div.weatherInfo_container p.label").html(myForecastData["tomorrow"]["summary"]["summary"]);
 	$("div#tomorrowPage .card>.front div.weatherInfo_container>p.cloud_cover_value").html(myForecastData["tomorrow"]["summary"]["cloudCover"]*100+"%");
 	var cloudCover2 = parseInt(myForecastData["tomorrow"]["summary"]["cloudCover"]*10);
