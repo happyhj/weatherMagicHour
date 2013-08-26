@@ -9,12 +9,14 @@
 position: absolute;
 display: block;
 top:-58px;
-left:28px;
+
 font-family: 'MeteoconsRegular';
 font-size:60px;
 color: #FFF;
 padding: 0px;
 margin:0px;
+width:100%;
+text-align: center;
 }
 
 * {
