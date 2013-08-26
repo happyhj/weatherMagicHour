@@ -12,6 +12,7 @@
     <description>
         It alarms you when it is good condition to take a fantastic photo. 
     </description>
+	<icon src="img/magic_hour_icon.png" gap:platform="android" gap:density="mdpi" />
 
     <author email="happyhj@gmail.com">
         Kim Hee Jae 
