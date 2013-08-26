@@ -160,19 +160,26 @@ function updateWeatherPage(){
 	sWeatherinfo =  sWeatherinfo + "주간예보:" + myForecastData["currently"]["weeklySummery"];
 
 
-	$("div#todayPage .card>.front div.weatherInfo_container:nth-child(4)>p").html(myForecastData["currently"]["visibility"]+"km");
-	$("div#todayPage .card>.front div.weatherInfo_container:nth-child(5)>p.label").html(myForecastData["currently"]["summary"]);
-	$("div#todayPage .card>.front div.weatherInfo_container:nth-child(6)>p").html(myForecastData["currently"]["cloudCover"]*100+"%");
+	$("div#todayPage .card>.front div.weatherInfo_container:nth-child(4)>p").html(parseInt(myForecastData["currently"]["visibility"])+"km");
+	$("div#todayPage .card>.front div.weatherInfo_container p.label").html(myForecastData["currently"]["summary"]);
+	$("div#todayPage .card>.front div.weatherInfo_container>p.cloud_cover_value").html(myForecastData["currently"]["cloudCover"]*100+"%");
 	var cloudCover = parseInt(myForecastData["currently"]["cloudCover"]*10);
 	$("div#todayPage .card>.front div.weatherInfo_container:nth-child(6)>img").attr("src","img/cloudCover"+cloudCover+".png");
 
 	$("div#tomorrowPage .card>.front div.weatherInfo_container:nth-child(5)>p").html(myForecastData["tomorrow"]["summary"]["precipProbability"]*100+"%");
-	$("div#tomorrowPage .card>.front div.weatherInfo_container:nth-child(6)>p.label").html(myForecastData["tomorrow"]["summary"]["summary"]);
-	$("div#tomorrowPage .card>.front div.weatherInfo_container:nth-child(7)>p").html(myForecastData["tomorrow"]["summary"]["cloudCover"]*100+"%");
+	$("div#tomorrowPage .card>.front div.weatherInfo_container p.label").html(myForecastData["tomorrow"]["summary"]["summary"]);
+	$("div#tomorrowPage .card>.front div.weatherInfo_container>p.cloud_cover_value").html(myForecastData["tomorrow"]["summary"]["cloudCover"]*100+"%");
 	var cloudCover2 = parseInt(myForecastData["tomorrow"]["summary"]["cloudCover"]*10);
 	$("div#tomorrowPage .card>.front div.weatherInfo_container:nth-child(7)>img").attr("src","img/cloudCover"+cloudCover2+".png");
 
-
+	if(myForecastData["tomorrow"]["summary"]["summary"].length>=14) {
+		$("div#tomorrowPage div.weatherInfo_container p.weather_description.label").css("font-size","14px");
+		console.log(myForecastData["tomorrow"]["summary"]["summary"].length);
+	}
+	if(myForecastData["currently"]["summary"].length>=14) {
+		$("div#todayPage div.weatherInfo_container p.weather_description.label").css("font-size","14px");
+		console.log(myForecastData["currently"]["summary"].length);
+	}
 }
 
 function getAdjustedTimeString(date, minute) {
