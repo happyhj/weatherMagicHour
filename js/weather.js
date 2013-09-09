@@ -23,7 +23,7 @@ function showWeather(position)
 		url: sQuery,
 		dataType: "jsonp",
 		success: function(forecastData){
-			console.log(JSON.stringify(forecastData));
+//			console.log(JSON.stringify(forecastData));
 			//로컬스토리지에 예보정보 저장
 			localStorage.setItem("myForecastData",JSON.stringify(extractWeatherInfo(forecastData)));
 			updateWeatherPage();
@@ -180,11 +180,11 @@ function updateWeatherPage(){
 
 	if(myForecastData["tomorrow"]["summary"]["summary"].length>=14) {
 		$("div#tomorrowPage div.weatherInfo_container p.weather_description.label").css("font-size","14px");
-		console.log(myForecastData["tomorrow"]["summary"]["summary"].length);
+//		console.log(myForecastData["tomorrow"]["summary"]["summary"].length);
 	}
 	if(myForecastData["currently"]["summary"].length>=14) {
 		$("div#todayPage div.weatherInfo_container p.weather_description.label").css("font-size","14px");
-		console.log(myForecastData["currently"]["summary"].length);
+//		console.log(myForecastData["currently"]["summary"].length);
 	}
 }
 
@@ -253,12 +253,12 @@ function extractWeatherInfo(forecastData){
 	present['tomorrow']['summary'] = tomorrowSummary;
 	present['tomorrow']['sunriseTime'] = daily['data'][1]['sunriseTime'];
 	present['tomorrow']['sunsetTime'] = daily['data'][1]['sunsetTime'];
-	present['tomorrow']['sunriseForecast']=[];
-	present['tomorrow']['sunriseForecast'][0] = hourly['data'][getNearestHourlyForecastIndex(present['tomorrow']['sunriseTime'],forecastData)];
-	present['tomorrow']['sunriseForecast'][1] = hourly['data'][getNearestHourlyForecastIndex(present['tomorrow']['sunriseTime'],forecastData)+1];
-	present['tomorrow']['sunsetForecast']=[];
-	present['tomorrow']['sunsetForecast'][0] = hourly['data'][getNearestHourlyForecastIndex(present['tomorrow']['sunsetTime'],forecastData)];	
-	present['tomorrow']['sunsetForecast'][1] = hourly['data'][getNearestHourlyForecastIndex(present['tomorrow']['sunsetTime'],forecastData)+1];
+	present['tomorrow']['sunriseForecast']={};
+	present['tomorrow']['sunriseForecast'] = hourly['data'][getNearestHourlyForecastIndex(present['tomorrow']['sunriseTime'],forecastData)];
+//	present['tomorrow']['sunriseForecast'][1] = hourly['data'][getNearestHourlyForecastIndex(present['tomorrow']['sunriseTime'],forecastData)+1];
+	present['tomorrow']['sunsetForecast']={};
+	present['tomorrow']['sunsetForecast'] = hourly['data'][getNearestHourlyForecastIndex(present['tomorrow']['sunsetTime'],forecastData)];	
+//	present['tomorrow']['sunsetForecast'][1] = hourly['data'][getNearestHourlyForecastIndex(present['tomorrow']['sunsetTime'],forecastData)+1];
 	present['tomorrow']['dateExpression'] = {};
 
 	var tomorrowDateExpression = new Date(daily['data'][1]['time']*1000);
@@ -275,21 +275,18 @@ function extractWeatherInfo(forecastData){
 	else if(numberOfMagicHoursLeftToday == 1) {
 		// 일몰 매직아워 시간만 가져옴
 		present['today']['sunsetTime'] = daily['data'][0]['sunsetTime'];	
-		present['today']['sunsetForecast']=[];
-		present['today']['sunsetForecast'][0] = hourly['data'][getNearestHourlyForecastIndex(present['today']['sunsetTime'],forecastData)];	
-		present['today']['sunsetForecast'][1] = hourly['data'][getNearestHourlyForecastIndex(present['today']['sunsetTime'],forecastData)+1];	
+		present['today']['sunsetForecast']={};
+		present['today']['sunsetForecast'] = hourly['data'][getNearestHourlyForecastIndex(present['today']['sunsetTime'],forecastData)];	
+//		present['today']['sunsetForecast'][1] = hourly['data'][getNearestHourlyForecastIndex(present['today']['sunsetTime'],forecastData)+1];	
 		
 	} else {
 		// 일출 일몰 매직아워 다 가져옴
 		present['today']['sunriseTime'] = daily['data'][0]['sunriseTime'];
 		present['today']['sunsetTime'] = daily['data'][0]['sunsetTime'];
-		present['today']['sunriseForecast'] = [];
-		present['today']['sunriseForecast'][0] = hourly['data'][getNearestHourlyForecastIndex(present['today']['sunsetTime'],forecastData)];	
-		present['today']['sunriseForecast'][1] = hourly['data'][getNearestHourlyForecastIndex(present['today']['sunsetTime'],forecastData)+1];
-		
-		present['today']['sunsetForecast'] = [];		
-		present['today']['sunsetForecast'][0] = hourly['data'][getNearestHourlyForecastIndex(present['today']['sunsetTime'],forecastData)];	
-		present['today']['sunsetForecast'][1] = hourly['data'][getNearestHourlyForecastIndex(present['today']['sunsetTime'],forecastData)+1];	
+		present['today']['sunriseForecast'] = {};
+		present['today']['sunriseForecast'] = hourly['data'][getNearestHourlyForecastIndex(present['today']['sunsetTime'],forecastData)];			
+		present['today']['sunsetForecast'] = {};		
+		present['today']['sunsetForecast'] = hourly['data'][getNearestHourlyForecastIndex(present['today']['sunsetTime'],forecastData)];	
 	}
 
 	present['today']['dateExpression'] = {};
@@ -326,16 +323,56 @@ function getNumberOfMagicHoursLeftToday(forecastData){
 }
 
 function getNearestHourlyForecastIndex(timeStamp,forecastData) {
-	var tempNearestTimeInHourlyForecast;
+//	var tempNearestTimeInHourlyForecast;
 	var index;
 	for( index in forecastData['hourly']['data']){
 		if(timeStamp < forecastData['hourly']['data'][index]['time']) {
-			tempNearestTimeInHourlyForecast = forecastData['hourly']['data'][index-1]['time'];
-			index = index - 1;
+			var minDiffbefore,minDiffafter;
+			
+			minDiffbefore = getMinuteDifference(forecastData['hourly']['data'][index-1]['time'],timeStamp);
+			minDiffafter = getMinuteDifference(timeStamp,forecastData['hourly']['data'][index]['time']);
+
+			if(minDiffbefore<minDiffafter) {
+				index = index-1;
+			}
 			break;	
 		}
 	}
+//			console.log("near : " + unixTimeStampToExpression(forecastData['hourly']['data'][index-1]['time']));
+			console.log("center: " + unixTimeStampToExpression(timeStamp));
+			console.log("near : " + unixTimeStampToExpression(forecastData['hourly']['data'][index]['time']));
 	return index;	
+}
+
+function unixTimeStampToExpression(timeStamp) {
+	var date = new Date(timeStamp*1000);
+	var month = date.getMonth();
+	var dates = date.getDate();
+	var hours = date.getHours();
+	var minutes = date.getMinutes();
+//	return (month+1) + '월' + dates + '일' + hours + "시" + minutes + "분";	
+	return hours + "시" + minutes + "분";	
+}
+
+function getMinuteDifference(formerTimestamp, laterTimestamp) {
+	var date1 = new Date(formerTimestamp*1000);
+	var years1 = date1.getYear();
+	var month1 = date1.getMonth();
+	var dates1 = date1.getDate();
+	var hours1 = date1.getHours();	
+	var minutes1 = date1.getMinutes();
+	var date2 = new Date(laterTimestamp*1000);
+	var years2 = date2.getYear();
+	var month2 = date2.getMonth();
+	var dates2 = date2.getDate();
+	var hours2 = date2.getHours();
+	var minutes2 = date2.getMinutes();		
+	
+//	console.log(hours2);
+
+	var minDiff = (hours2-hours1)*60+minutes2-minutes1;
+	
+	return minDiff;
 }
 
 function getWeatherIconCode(present) {
@@ -382,12 +419,3 @@ function getWeatherIconCode(present) {
 }
 
 
-
-// 창 크기가 변하면 이벤트 발생
-$(window).resize(function() {
-
-});
-
-function resizeComponents(forecastData){
-
-}
