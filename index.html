@@ -232,8 +232,11 @@ function loaded () {
 				$("#alarm_compact_menu").animate({opacity:"0"},menuTitleTransformMillisec);								
 			break;			
 		}
-	});	
-	
+	});
+	// 다른페이지로 스크롤 시작 시 확장된 디테일 modal 접기	
+	myScroll.on('scrollStart', function () { 
+		
+	});
 }
 
 </script>
@@ -423,7 +426,7 @@ $(document).ready(function() {
 
 
 		// 일출 터치 시 세부정보 modal로 toggle  
-		$(".mg-container:nth-child(1) img,.mg-container:nth-child(1) p").bind("touchend mouseup", function(){
+		$(".mg-container:nth-child(1) img,.mg-container:nth-child(1) p").bind("tap mouseup", function(){
 			if(isSunriseFocused===false) {
 				$("div.card-container").animate({opacity:0},400);
 				$(".mg-container:nth-child(2)").css("visibility","hidden");
@@ -448,7 +451,7 @@ $(document).ready(function() {
 			}
 		});
 		// 일몰 터치 시 세부정보 modal로 toggle  
-		$(".mg-container:nth-child(2) img,.mg-container:nth-child(2) p").bind("touchend mouseup", function(){
+		$(".mg-container:nth-child(2) img,.mg-container:nth-child(2) p").bind("tap mouseup", function(){
 			if(isSunsetFocused===false) {
 				$("div.card-container").animate({opacity:0},400);
 				$(".mg-container:nth-child(1)").css("visibility","hidden");
