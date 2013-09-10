@@ -27,9 +27,7 @@
 <script type="text/javascript" src="js/iscroll.js"></script>
 </head>
 <body onload="loaded()">
-<div class="graybackground">
-<h1>hello</h1>
-</div>
+
 <div id="nav">
 	<div id="today_full_date" class="full_date"><span>오늘 날짜 길게</span>
 		<p>TODAY</p>
@@ -59,14 +57,14 @@
 					<div class="slide" id="todayPage">
 						<div class="touch-container">
 							<div class="mg-container">
-								<div class="upcoming_magichour_label">Upcoming Magic Hour
-								</div>
+								<div class="upcoming_magichour_label">Upcoming Magic Hour</div>
 								<div class="sun-img-container"/>
 									<img src="img/sunrise.png" class="touchPad0" id="tdy_sunrise_img"/>
 								</div>
 								<p class="touchPad0">12:00 - 12:30 - 13:00</p>
 							</div>
 							<div class="mg-container">
+								<div class="upcoming_magichour_label">Upcoming Magic Hour</div>
 								<div class="sun-img-container"/>
 									<img src="img/sunset.png" class="touchPad0" id="tdy_sunset_img"/>
 								</div>
@@ -109,12 +107,14 @@
 					<div class="slide" id="tomorrowPage">
 						<div class="touch-container" id="touchPad1">
 							<div class="mg-container">
+								<div class="upcoming_magichour_label">Upcoming Magic Hour</div>
 								<div class="sun-img-container"/>
 									<img src="img/sunrise.png" class="touchPad1" id="tdy_sunrise_img"/>
 								</div>
 								<p class="touchPad1">12:00 - 12:30 - 13:00</p>
 							</div>
 							<div class="mg-container">
+								<div class="upcoming_magichour_label">Upcoming Magic Hour</div>
 								<div class="sun-img-container"/>
 									<img src="img/sunset.png" class="touchPad1" id="tdy_sunset_img"/>
 								</div>
@@ -163,9 +163,11 @@
 
 <script type="text/javascript">
 
+// 메뉴구조를 이루는 iScroll 객체 
 var myScroll;
 
 function loaded () {
+	// carousel 메뉴 구조 초기화
 	myScroll = new IScroll('#wrapper', {
 		scrollX: true,
 		scrollY: false,
@@ -179,89 +181,60 @@ function loaded () {
 			resize: false
 		}
 	});
-	
-	myScroll.on('flick', function () { 
-		console.log('flicked ' + this.currentPage.pageX); 
-	
-	});		
 
-	myScroll.on('onScroll', function () { 
-	
-		console.log('on scroll');
-	
-	});
-
-/*
-	myScroll.on('scrollStart', function () { 
-//		console.log('scroll Start Page:'); 
-		switch(this.currentPage.pageX) {
-			case 0:
-				$("#today_full_date").animate({opacity:"0"},300);
-				break;
-			case 1:
-				$("#tomorrow_full_date").animate({opacity:"0"},300);
-				break;
-			case 2:
-				$("#alarm_full_menu").animate({opacity:"0"},300);
-				break;
-		}		
-	
-	});
-*/	
+	// carousel 페이지 스크롤 완료시, 메뉴효과발생  
+	var menuTitleTransformMillisec = 300;
 	myScroll.on('scrollEnd', function () { 
-//		console.log('scroll Ended Page:' + this.currentPage.pageX); 
 		switch(this.currentPage.pageX) {
 			case 0:	
 				$("#today_full_date").css("display","block");
 				
-				$("#today_full_date").animate({opacity:"1"},300);
-				$("#tomorrow_full_date").animate({opacity:"0"},300);
-				$("#alarm_full_menu").animate({opacity:"0"},300);
+				$("#today_full_date").animate({opacity:"1"},menuTitleTransformMillisec);
+				$("#tomorrow_full_date").animate({opacity:"0"},menuTitleTransformMillisec);
+				$("#alarm_full_menu").animate({opacity:"0"},menuTitleTransformMillisec);
 
 				$("#tomorrow_full_date").css("display","none");
 				$("#alarm_full_menu").css("display","none");
 	
 				
-				$("#today_compact_date").animate({opacity:"0"},300);				
-				$("#tomorrow_compact_date").animate({opacity:"1",left:"62%"},300);
-				$("#alarm_compact_menu").animate({opacity:"1"},300);
+				$("#today_compact_date").animate({opacity:"0"},menuTitleTransformMillisec);				
+				$("#tomorrow_compact_date").animate({opacity:"1",left:"62%"},menuTitleTransformMillisec);
+				$("#alarm_compact_menu").animate({opacity:"1"},menuTitleTransformMillisec);
 				
 
 			break;
 			case 1:
 				$("#tomorrow_full_date").css("display","block");
 
-				$("#today_full_date").animate({opacity:"0"},300);
-				$("#tomorrow_full_date").animate({opacity:"1"},300);
-				$("#alarm_full_menu").animate({opacity:"0"},300);					
+				$("#today_full_date").animate({opacity:"0"},menuTitleTransformMillisec);
+				$("#tomorrow_full_date").animate({opacity:"1"},menuTitleTransformMillisec);
+				$("#alarm_full_menu").animate({opacity:"0"},menuTitleTransformMillisec);					
 
 				$("#today_full_date").css("display","none");
 				$("#alarm_full_menu").css("display","none");
 
-				$("#today_compact_date").animate({opacity:"1"},300);
-				$("#tomorrow_compact_date").animate({opacity:"0"},300);
-				$("#alarm_compact_menu").animate({opacity:"1"},300);
+				$("#today_compact_date").animate({opacity:"1"},menuTitleTransformMillisec);
+				$("#tomorrow_compact_date").animate({opacity:"0"},menuTitleTransformMillisec);
+				$("#alarm_compact_menu").animate({opacity:"1"},menuTitleTransformMillisec);
 			break;
 			case 2:
 				$("#alarm_full_menu").css("display","block");
 
-				$("#today_full_date").animate({opacity:"0"},300);
-				$("#tomorrow_full_date").animate({opacity:"0"},300);
-				$("#alarm_full_menu").animate({opacity:"1"},300);
+				$("#today_full_date").animate({opacity:"0"},menuTitleTransformMillisec);
+				$("#tomorrow_full_date").animate({opacity:"0"},menuTitleTransformMillisec);
+				$("#alarm_full_menu").animate({opacity:"1"},menuTitleTransformMillisec);
 
 				$("#today_full_date").css("display","none");
 				$("#tomorrow_full_date").css("display","none");
 
-				$("#today_compact_date").animate({opacity:"1"},300);
-				$("#tomorrow_compact_date").animate({opacity:"1",left:"19%"},300);
-				$("#alarm_compact_menu").animate({opacity:"0"},300);								
+				$("#today_compact_date").animate({opacity:"1"},menuTitleTransformMillisec);
+				$("#tomorrow_compact_date").animate({opacity:"1",left:"19%"},menuTitleTransformMillisec);
+				$("#alarm_compact_menu").animate({opacity:"0"},menuTitleTransformMillisec);								
 			break;			
 		}
 	});	
 	
 }
-
-document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
 </script>
 <link rel="stylesheet" type="text/css" href="css/flipCard.css" />		
@@ -382,26 +355,7 @@ document.addEventListener('touchmove', function (e) { e.preventDefault(); }, fal
 		font-size: 18px;	
 		text-align: center;	
 	}
-	
-	div.graybackground {
-		position: absolute;
-		top: 0px;
-		height: 100%;
-		width: 100%;
-		background-color: #444;
-		opacity: 0;	
-		z-index:7;
-		text-align: center;
-	}	
-	div.graybackground h1 {
-		display: inline-block;
-		font-size: xx-large;
-		text-align: center;
-		background: -webkit-linear-gradient(left,  rgba(99,96,123,1) 0%,rgba(135,94,128,1) 16%,rgba(178,93,107,1) 31%,rgba(225,116,70,1) 46%,rgba(251,127,65,1) 62%,rgba(226,188,61,1) 80%,rgba(127,66,66,1) 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		text-shadow: 12px 7px 8px transparent;
-	}
+		
 </style>
 
 <script src="js/flipCard.js"></script>
@@ -409,19 +363,12 @@ document.addEventListener('touchmove', function (e) { e.preventDefault(); }, fal
 var navHeight = 120;
 var weatherInfoHeight = 120;
 
+var isSunriseFocused = false;
+var isSunsetFocused = false;
+
 $(document).ready(function() {
-	$("#wrapper").css("width",String($(window).width())+"px");
-	$(".slide").css("width",String($(window).width())+"px");
-	$("#scroller").css("width",String($(window).width()*3)+"px");
 
-	$("#wrapper").css("height",String($(window).height()-navHeight)+"px");
-	$(".slide").css("height",String($(window).height()-navHeight)+"px");
-	$("#scroller").css("height",String($(window).height()-navHeight)+"px");
-	$("#viewport").css("height",String($(window).height()-navHeight)+"px");
-
-	$("div.touch-container").css("height",String($(window).height()-navHeight-weatherInfoHeight)+"px");
-
-
+	// 네비게이션 터치시 해당 페이지로 이동되는 이벤트 바인딩
 	$("#today_compact_date").bind( "touchend", function() {
 		myScroll.scrollTo(0,0,300);
 		
@@ -463,45 +410,78 @@ $(document).ready(function() {
 		myScroll.currentPage.pageX=2;
 	});
 	
-		$("#today_full_date").animate({opacity:"1"},300);
-		$("#tomorrow_full_date").animate({opacity:"0"},300);
-		$("#alarm_full_menu").animate({opacity:"0"},300);
-		
-		$("#today_compact_date").animate({opacity:"0"},300);
-		$("#tomorrow_compact_date").animate({opacity:"1"},300);
-		$("#alarm_compact_menu").animate({opacity:"1"},300);
-		$("#tomorrow_full_date").css("display","none");
-		$("#alarm_full_menu").css("display","none");
+	// iscroll Nav부분 display상태 초기화
+	$("#today_full_date").css("opacity","1");
+	$("#tomorrow_full_date").css("opacity","0");
+	$("#alarm_full_menu").css("opacity","0");
+	
+	$("#today_compact_date").css("opacity","0");
+	$("#tomorrow_compact_date").css("opacity","0");
+	$("#alarm_compact_menu").css("opacity","1");
+	$("#tomorrow_full_date").css("display","none");
+	$("#alarm_full_menu").css("display","none");
 
 
-		// 터치 플립 설정 
-		$(".mg-container img").bind("touchstart mousedown", function(){
-			$("div.graybackground").animate({opacity:1},400);
-			$("div.card-container").animate({opacity:0},400);
-			$(".mg-container:nth-child(2)").animate({opacity:0},400);
-			myScroll.disable();
-		});
-		$(".mg-container p").bind("touchstart mousedown", function(){
-			$("div.graybackground").animate({opacity:1},400);
-			$("div.card-container").animate({opacity:0},400);
-			$(".mg-container:nth-child(2)").animate({opacity:0},400);
-			myScroll.disable();
-		});
-/*
-		$(".touchPad0").bind("touchstart mousedown", function(){
-			$("#bBtn0").trigger("click");
-		});
-		$(".touchPad0").bind("touchend mouseup", function(){
-			$("#bBtn0").trigger("click");
-		});
+		// 일출 터치 시 세부정보 modal로 toggle  
+		$(".mg-container:nth-child(1) img,.mg-container:nth-child(1) p").bind("touchend mouseup", function(){
+			if(isSunriseFocused===false) {
+				$("div.card-container").animate({opacity:0},400);
+				$(".mg-container:nth-child(2)").css("visibility","hidden");
+				$(".mg-container:nth-child(2)").css("opacity","0");
 
-		$(".touchPad1").bind("touchstart mousedown", function(){
-			$("#bBtn1").trigger("click");
+				$(".mg-container:nth-child(1) img").animate({width:"100px",height:"80px"},400);
+				$(".mg-container:nth-child(1) p").animate({fontSize: "36px"},400);
+				
+				myScroll.disable();		
+
+				isSunriseFocused = true;
+			} else {
+				$("div.card-container").animate({opacity:1},400);		
+				$(".mg-container:nth-child(2)").css("visibility","visible");
+				$(".mg-container:nth-child(2)").animate({opacity:"1"},400);
+				
+				$(".mg-container:nth-child(1) img").animate({width:"70px",height:"56px"},400);
+				$(".mg-container:nth-child(1) p").animate({fontSize: "24px"},400);	
+				myScroll.enable();
+
+				isSunriseFocused = false;			
+			}
 		});
-		$(".touchPad1").bind("touchend mouseup", function(){
-			$("#bBtn1").trigger("click");
+		// 일몰 터치 시 세부정보 modal로 toggle  
+		$(".mg-container:nth-child(2) img,.mg-container:nth-child(2) p").bind("touchend mouseup", function(){
+			if(isSunsetFocused===false) {
+				$("div.card-container").animate({opacity:0},400);
+				$(".mg-container:nth-child(1)").css("visibility","hidden");
+				$(".mg-container:nth-child(1)").css("opacity","0");
+
+				$(".mg-container:nth-child(2)").animate({top:"-156px"},400);
+	
+				$(".mg-container:nth-child(2) img").animate({width:"100px",height:"80px"},400);
+				$(".mg-container:nth-child(2) p").animate({fontSize: "36px"},400);
+	
+				myScroll.disable();	
+				
+				isSunsetFocused = true;
+			} else {
+				$("div.card-container").animate({opacity:1},400);				
+				$(".mg-container:nth-child(1)").css("visibility","visible");
+				$(".mg-container:nth-child(1)").animate({opacity:"1"},400);
+				
+				var myForecastData = JSON.parse(localStorage.getItem('myForecastData'));
+
+				if (Object.keys(myForecastData['today']).length==3) {
+					$("#todayPage .mg-container:nth-child(1)").css("visibility","hidden");
+				}			
+
+				$(".mg-container:nth-child(2)").animate({top:"0px"},400);
+	
+				$(".mg-container:nth-child(2) img").animate({width:"70px",height:"56px"},400);
+				$(".mg-container:nth-child(2) p").animate({fontSize: "24px"},400);
+				myScroll.enable();
+
+				isSunsetFocused = false;			
+			}
 		});
-*/
 
 		getLocation();
 		resizeObjects();
@@ -511,29 +491,38 @@ $(document).ready(function() {
 $(window).resize(function() {
 	resizeObjects();
 });
-
+function updateUpcomingLabel() {
+	$.each($("div.mg-container"),function() {
+		$("div.upcoming_magichour_label",this).css("visibility","hidden");
+	});
+	$.each($("div.mg-container"),function() {
+		if($(this).css("visibility")!="hidden") {
+			$("div.upcoming_magichour_label",this).css("visibility","visible");
+			return false;			
+		}
+	});
+} 
 function resizeObjects() {
-			$("#wrapper").css("width",String($(window).width())+"px");
-			$(".slide").css("width",String($(window).width())+"px");
-			$("#scroller").css("width",String($(window).width()*3)+"px");
+	// 화면크기에 따라 iscroll 크기 조절 
+	$("#wrapper").css("width",String($(window).width())+"px");
+	$(".slide").css("width",String($(window).width())+"px");
+	$("#scroller").css("width",String($(window).width()*3)+"px");
 
-			$("#wrapper").css("height",String($(window).height()-navHeight)+"px");
-			$(".slide").css("height",String($(window).height()-navHeight)+"px");
-			$("#scroller").css("height",String($(window).height()-navHeight)+"px");
-			$("#viewport").css("height",String($(window).height()-navHeight)+"px");
-			
-			$("div.touch-container").css("height",String($(window).height()-navHeight-weatherInfoHeight)+"px");
-			
-			// 창 너비 - .weather_container_title 의 너비
-			$("div#todayPage p.weatherInfo_border_container.right").css("width",($(window).width()-95)+"px");
-			$("div#tomorrowPage p.weatherInfo_border_container.right").css("width",($(window).width()-105)+"px");	
-			
-			// 일출 일본 시간 위치
-			console.log($("div.slide>div.touch-container").css("height"));
-			$("div.slide div.mg-container").css("height",$("div.slide>div.touch-container").height()*0.5+"px");
-			$("div.slide div.mg-container:nth-child(1)").css("padding-top",$("div.slide>div.touch-container").height()*0.15+"px");
-			$("div.slide div.mg-container:nth-child(2)").css("padding-top",$("div.slide>div.touch-container").height()*0.09+"px");
-
+	$("#wrapper").css("height",String($(window).height()-navHeight)+"px");
+	$(".slide").css("height",String($(window).height()-navHeight)+"px");
+	$("#scroller").css("height",String($(window).height()-navHeight)+"px");
+	$("#viewport").css("height",String($(window).height()-navHeight)+"px");
+	
+	$("div.touch-container").css("height",String($(window).height()-navHeight-weatherInfoHeight)+"px");
+	
+	// 창 너비 - .weather_container_title 의 너비
+	$("div#todayPage p.weatherInfo_border_container.right").css("width",($(window).width()-95)+"px");
+	$("div#tomorrowPage p.weatherInfo_border_container.right").css("width",($(window).width()-105)+"px");	
+	
+	// 일출 일몰 시간 위치
+	$("div.slide div.mg-container").css("height",$("div.slide>div.touch-container").height()*0.5+"px");
+	$("div.slide div.mg-container:nth-child(1)").css("padding-top",$("div.slide>div.touch-container").height()*0.15+"px");
+	$("div.slide div.mg-container:nth-child(2)").css("padding-top",$("div.slide>div.touch-container").height()*0.09+"px");
 }
 
 </script>

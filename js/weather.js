@@ -69,7 +69,7 @@ function updateWeatherPage(){
 		$("#todayPage .mgblank-container").css("display","block");
 	} // 일몰 골든아워만 남은 경우 
 	else if (Object.keys(myForecastData['today']).length==3) {
-		$("#todayPage .mg-container:nth-child(1)").css("display","none");
+		$("#todayPage .mg-container:nth-child(1)").css("visibility","hidden");
 		$("#todayPage .mg-container:nth-child(2)").css("display","block");
 
 
@@ -186,6 +186,11 @@ function updateWeatherPage(){
 		$("div#todayPage div.weatherInfo_container p.weather_description.label").css("font-size","14px");
 //		console.log(myForecastData["currently"]["summary"].length);
 	}
+	
+	
+	
+	updateUpcomingLabel();
+
 }
 
 function getAdjustedTimeString(date, minute) {
