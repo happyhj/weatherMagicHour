@@ -1,0 +1,53 @@
+
+<html>
+<head><!-- jQuery 1.10.1 : Start -->
+<script src="js/jquery.min.js"></script>
+<script src="js/jgestures.js"  type="text/javascript"></script>
+<!-- jQuery 1.10.1 : End -->
+<style>
+body, html{
+margin: 0;
+padding: 0;
+}
+div {
+	width: 20%;
+	height: 100%;
+	float:left;
+}
+#before_sunrise{
+	background: -webkit-linear-gradient(top, rgba(9,16,53,1) 0%,rgba(13,39,121,1) 27%,rgba(15,63,159,1) 49%,rgba(18,108,188,1) 77%,rgba(87,153,214,1) 100%); /* Chrome10+,Safari5.1+ */
+}
+#warm_blue_hour{
+	background: -webkit-linear-gradient(top, rgba(1,53,135,1) 0%,rgba(2,105,180,1) 36%,rgba(67,135,205,1) 53%,rgba(183,200,211,1) 79%,rgba(252,230,180,1) 91%,rgba(255,230,122,1) 95%,rgba(255,149,116,1) 100%); /* Chrome10+,Safari5.1+ */
+}
+#cold_grey_orange{
+	background: -webkit-linear-gradient(top, rgba(77,114,156,1) 0%,rgba(131,157,180,1) 31%,rgba(163,180,182,1) 62%,rgba(168,175,159,1) 84%,rgba(239,174,93,1) 99%); /* Chrome10+,Safari5.1+ */
+}
+#oriental_grey{
+	background: -webkit-linear-gradient(top, rgba(167,167,167,1) 0%,rgba(205,200,181,1) 29%,rgba(223,213,173,1) 42%,rgba(231,215,173,1) 52%,rgba(255,203,103,1) 73%,rgba(253,175,41,1) 84%,rgba(250,117,0,1) 97%,rgba(149,69,32,1) 99%,rgba(114,67,44,1) 100%); /* Chrome10+,Safari5.1+ */
+}
+#hot_purple {
+	background: -webkit-linear-gradient(top, rgba(99,96,123,1) 0%,rgba(135,94,128,1) 16%,rgba(178,93,107,1) 35%,rgba(225,116,70,1) 69%,rgba(251,127,65,1) 84%,rgba(226,188,61,1) 100%); /* Chrome10+,Safari5.1+ */
+}
+</style>
+<script>
+$(document).ready(function() {
+	$("div").bind("click", function(){
+		$(this).css("width","100%");
+	});
+});
+</script>
+</head>
+<body>
+<div id="before_sunrise">
+</div>
+<div id="warm_blue_hour">
+</div>
+<div id="cold_grey_orange">
+</div>
+<div id="oriental_grey">
+</div>
+<div id="hot_purple">
+</div>
+</body>
+</html>

@@ -10,20 +10,82 @@ function getLocation()
 		alert("이 브라우저는 Geolocation를 지원하지 않습니다");
 	}
 }
-
+function showSpinner() {
+			var opts = {
+			  lines: 30, // The number of lines to draw
+			  length: 0, // The length of each line
+			  width: 5, // The line thickness
+			  radius: 120, // The radius of the inner circle
+			  corners: 1, // Corner roundness (0..1)
+			  rotate: 0, // The rotation offset
+			  direction: 1, // 1: clockwise, -1: counterclockwise
+			  color: '#fff', // #rgb or #rrggbb or array of colors
+			  speed: 0.9, // Rounds per second
+			  trail: 100, // Afterglow percentage
+			  shadow: false, // Whether to render a shadow
+			  hwaccel: false, // Whether to use hardware acceleration
+			  className: 'spinner', // The CSS class to assign to the spinner
+			  zIndex: 2e9, // The z-index (defaults to 2000000000)
+			  top: 'auto', // Top position relative to parent in px
+			  left: 'auto' // Left position relative to parent in px
+			};
+			var target = document.getElementById('spinner');
+			var spinner = new Spinner(opts).spin(target);	
+}
+function loadingScreenAnimation(duration,ease,dawngap){
+	$(".magicColor5").css("opacity","1");	
+	$(".magicColor4").css("opacity","1");	
+	$(".magicColor3").css("opacity","1");	
+	$(".magicColor2").css("opacity","1");	
+	$(".magicColor1").css("opacity","1");	
+	
+	$(".magicColor5").animate({opacity:"0"},duration,ease,function() {
+		$(".magicColor4").animate({opacity:"0"},duration,ease,function() {
+			$(".magicColor3").animate({opacity:"0"},duration,ease,function() {
+				$(".magicColor2").animate({opacity:"0"},dawngap,"swing",function() {
+					$(".magicColor2").animate({opacity:"1"},dawngap,"swing",function() {
+					$(".magicColor3").animate({opacity:"1"},duration,ease,function() {
+					$(".magicColor4").animate({opacity:"1"},duration,ease,function() {
+					$(".magicColor5").animate({opacity:"1"},duration,ease,function() {
+					});
+					});
+					});
+					});
+				});
+			});
+		});
+	});
+}
 function showWeather(position)
 {
 	var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
-    
 	var sQuery = "https://api.forecast.io/forecast/29279b7685082aa05011a94496dd608f/"+latitude+","+longitude+"?units=si";
-//	alert(sQuery);
+
+	// 스타트업 애니메이션 시작 
+	loadingScreenAnimation(1000,"linear",5000);
+	showSpinner();
+
+//	setInterval(loadingScreenAnimation(),40000);
+	
+//	$("#magicColor4").animate({opacity:"0"},8000);
+//	$("#magicColor5").animate({opacity:"0"},10000);
+
+
+
 	$.ajax({
 		type: "GET",
 		url: sQuery,
 		dataType: "jsonp",
 		success: function(forecastData){
-//			console.log(JSON.stringify(forecastData));
+		
+			// 스타트업 스크린 제거
+	//		clearInterval(loadingScreenAnimation);
+			setTimeout(function() {$(".startup_container.splash").animate({opacity:"0"},600,"swing",function() {$(".startup_container.splash").css("display","none")})},5000);			
+
+//			setTimeout(function() {loadingScreenAnimation(5000,"linear",5000)},5600);
+//			setInterval(function() {loadingScreenAnimation(5000,"linear",5000)},45600);
+			
 			//로컬스토리지에 예보정보 저장
 			localStorage.setItem("myForecastData",JSON.stringify(extractWeatherInfo(forecastData)));
 			updateWeatherPage();
@@ -161,7 +223,7 @@ function updateWeatherPage(){
 
 
 	$("div#todayPage div.card>.front div.weatherInfo_container>span.icon").html(getWeatherIconCode(myForecastData["currently"]));
-	
+//	console.log(myForecastData["currently"]["visibility"]);
 	$("div#todayPage .card>.front div.weatherInfo_container:nth-child(4)>p").html(parseInt(myForecastData["currently"]["visibility"])+"km");
 	$("div#todayPage .card>.front div.weatherInfo_container p.label").html(myForecastData["currently"]["summary"]);
 	$("div#todayPage .card>.front div.weatherInfo_container>p.cloud_cover_value").html(parseInt(myForecastData["currently"]["cloudCover"]*100)+"%");
@@ -289,7 +351,7 @@ function extractWeatherInfo(forecastData){
 		present['today']['sunriseTime'] = daily['data'][0]['sunriseTime'];
 		present['today']['sunsetTime'] = daily['data'][0]['sunsetTime'];
 		present['today']['sunriseForecast'] = {};
-		present['today']['sunriseForecast'] = hourly['data'][getNearestHourlyForecastIndex(present['today']['sunsetTime'],forecastData)];			
+		present['today']['sunriseForecast'] = hourly['data'][getNearestHourlyForecastIndex(present['today']['sunriseTime'],forecastData)];			
 		present['today']['sunsetForecast'] = {};		
 		present['today']['sunsetForecast'] = hourly['data'][getNearestHourlyForecastIndex(present['today']['sunsetTime'],forecastData)];	
 	}
@@ -420,7 +482,6 @@ function getWeatherIconCode(present) {
 	default:
 	  return 'A';
 	}	
-	return
 }
 
 

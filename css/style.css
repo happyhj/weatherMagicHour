@@ -30,19 +30,8 @@ html {
 }
 
 body {
-background: rgb(99,96,123); /* Old browsers */
-background: -moz-linear-gradient(top,  rgba(99,96,123,1) 0%, rgba(135,94,128,1) 16%, rgba(178,93,107,1) 31%, rgba(225,116,70,1) 46%, rgba(251,127,65,1) 62%, rgba(226,188,61,1) 80%, rgba(127,66,66,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(99,96,123,1)), color-stop(16%,rgba(135,94,128,1)), color-stop(31%,rgba(178,93,107,1)), color-stop(46%,rgba(225,116,70,1)), color-stop(62%,rgba(251,127,65,1)), color-stop(80%,rgba(226,188,61,1)), color-stop(100%,rgba(127,66,66,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  rgba(99,96,123,1) 0%,rgba(135,94,128,1) 16%,rgba(178,93,107,1) 31%,rgba(225,116,70,1) 46%,rgba(251,127,65,1) 62%,rgba(226,188,61,1) 80%,rgba(127,66,66,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  rgba(99,96,123,1) 0%,rgba(135,94,128,1) 16%,rgba(178,93,107,1) 31%,rgba(225,116,70,1) 46%,rgba(251,127,65,1) 62%,rgba(226,188,61,1) 80%,rgba(127,66,66,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  rgba(99,96,123,1) 0%,rgba(135,94,128,1) 16%,rgba(178,93,107,1) 31%,rgba(225,116,70,1) 46%,rgba(251,127,65,1) 62%,rgba(226,188,61,1) 80%,rgba(127,66,66,1) 100%); /* IE10+ */
-background: linear-gradient(to bottom,  rgba(99,96,123,1) 0%,rgba(135,94,128,1) 16%,rgba(178,93,107,1) 31%,rgba(225,116,70,1) 46%,rgba(251,127,65,1) 62%,rgba(226,188,61,1) 80%,rgba(127,66,66,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#63607b', endColorstr='#7f4242',GradientType=0 ); /* IE6-9 */
 
 
-
-
-	
 	margin: 0px; padding: 0px;				
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
@@ -175,6 +164,8 @@ body {
 	top:0px;
 	
 	font-family: 'Roboto', sans-serif;
+	text-shadow: 1px 2px 0px rgba(0, 0, 0, 0.398438);
+
 	font-weight: 500;
 	color: white;
 	
@@ -190,6 +181,8 @@ body {
 	top:0px;
 	text-align: center;
 	font-family: 'Roboto', sans-serif;
+	text-shadow: 1px 2px 0px rgba(0, 0, 0, 0.398438);
+
 	font-weight: 500;
 	color: white;
 
