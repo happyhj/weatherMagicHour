@@ -10,6 +10,7 @@ function getLocation()
 		alert("이 브라우저는 Geolocation를 지원하지 않습니다");
 	}
 }
+var spinner;
 function showSpinner() {
 			var opts = {
 			  lines: 30, // The number of lines to draw
@@ -30,7 +31,7 @@ function showSpinner() {
 			  left: 'auto' // Left position relative to parent in px
 			};
 			var target = document.getElementById('spinner');
-			var spinner = new Spinner(opts).spin(target);	
+			spinner = new Spinner(opts).spin(target);	
 }
 function loadingScreenAnimation(duration,ease,dawngap){
 	$(".magicColor5").css("opacity","1");	
@@ -81,8 +82,19 @@ function showWeather(position)
 		
 			// 스타트업 스크린 제거
 	//		clearInterval(loadingScreenAnimation);
-			setTimeout(function() {$(".startup_container.splash").animate({opacity:"0"},600,"swing",function() {$(".startup_container.splash").css("display","none")})},5000);			
-
+			setTimeout(function() {
+				$(".startup_container.splash").animate(
+					{opacity:"0"},
+					600,
+					"swing",
+					function() {spinner.stop();
+						$(".startup_container.splash").css("display","none");
+						$(".startup_container").css("display","none");
+						$(".startup_container").html("");
+					})
+			},
+			4000);			
+			 
 //			setTimeout(function() {loadingScreenAnimation(5000,"linear",5000)},5600);
 //			setInterval(function() {loadingScreenAnimation(5000,"linear",5000)},45600);
 			

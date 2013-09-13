@@ -30,6 +30,7 @@ html {
 }
 
 body {
+	background: -webkit-linear-gradient(top, rgba(9,16,53,1) 0%,rgba(13,39,121,1) 27%,rgba(15,63,159,1) 49%,rgba(18,108,188,1) 77%,rgba(87,153,214,1) 100%); /* Chrome10+,Safari5.1+ */
 
 
 	margin: 0px; padding: 0px;				
