@@ -89,6 +89,9 @@ function showWeather(position)
 			//로컬스토리지에 예보정보 저장
 			localStorage.setItem("myForecastData",JSON.stringify(extractWeatherInfo(forecastData)));
 			updateWeatherPage();
+		},
+		error: function(request,status,error){
+        	alert("에러라능");
 		}
 	});	
 }
